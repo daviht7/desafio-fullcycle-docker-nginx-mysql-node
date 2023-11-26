@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
   connection.query(`INSERT INTO alunos (nome) VALUES ('${name}')`)
 
   connection.query(`SELECT nome FROM alunos`, (error, results, fields) => {
+    console.log(results);
     res.send(`
       <h1>Full Cycle Rocks!</h1>
       <ol>
@@ -30,5 +31,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log('Up on:', port);
+  console.log('Up on Port:', port);
 })
