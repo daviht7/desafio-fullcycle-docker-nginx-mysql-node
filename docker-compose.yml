@@ -17,9 +17,9 @@ services:
     build:
       context: ./node
     container_name: node
-    entrypoint: wait-for db:3306 -t 40 -- npm start
+    entrypoint: dockerize -wait tcp://db:3306 -timeout 40s ./start.sh
     volumes:
-      - ./node:/usr/src/app
+      - ./node:/app
     depends_on:
       - db
     networks:
@@ -38,6 +38,8 @@ services:
     environment:
       - MYSQL_DATABASE=nodedb
       - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 3306:3306
 
 networks:
   network:
